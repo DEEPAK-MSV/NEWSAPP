@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, ScrollView, Image ,Share} from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, ScrollView, Image, Share } from 'react-native';
 
 const GetNews = ({ route, navigation }) => {
   const [news, setNews] = useState([]);
@@ -30,16 +30,16 @@ const GetNews = ({ route, navigation }) => {
     }
   };
 
-  const share = async(url)=>{
+  const share = async (url) => {
     try {
       const result = await Share.share({
-        message:url
+        message: url
       });
 
     } catch (error) {
-      console.log(error); 
+      console.log(error);
     }
-    
+
   }
 
 
@@ -53,34 +53,36 @@ const GetNews = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-        <View style={{justifyContent:'center',alignItems:"center",backgroundColor:"#d34646",borderBottomLeftRadius:20,borderBottomRightRadius:20}}>
+      <View style={{ justifyContent: 'center', alignItems: "center", backgroundColor: "#d34646", borderBottomLeftRadius: 20, borderBottomRightRadius: 20 }}>
             <Text style={styles.txt}>{`${route.params.category}`}</Text>
-        </View>
+          </View>
       {isLoading ? (
-        <ActivityIndicator size="large" color="white" />
+        <ActivityIndicator size="large" color="#d34646" style={{ justifyContent: "center", alignContent: 'center' }} />
       ) : (
-        <ScrollView>
-          {news.map((article, index) => (
-            <View key={index} style={styles.newscontainer}>
-              <Image source={{ uri: article.urlToImage }} style={styles.img} />
-              <View>
-                <Text style={styles.author}>
-                  {isUrl(article.author) ? null : `${article.author}`}
-                </Text>
+        <>
+          <ScrollView>
+            {news.map((article, index) => (
+              <View key={index} style={styles.newscontainer}>
+                <Image source={{ uri: article.urlToImage }} style={styles.img} />
+                <View>
+                  <Text style={styles.author}>
+                    {isUrl(article.author) ? null : `${article.author}`}
+                  </Text>
+                </View>
+                <Text style={styles.description}>{article.description}</Text>
+                <View style={{ flexDirection: 'row' }}>
+                  <Text
+                    style={styles.read}
+                    onPress={() => navigation.navigate('webview', { url: article.url })}
+                  >
+                    Read More
+                  </Text>
+                  <Text style={styles.share} onPress={() => share(article.url)}>Share </Text>
+                </View>
               </View>
-              <Text style={styles.description}>{article.description}</Text>
-              <View style={{flexDirection:'row'}}>
-              <Text
-                style={styles.read}
-                onPress={() => navigation.navigate('webview', { url: article.url })}
-              >
-                Read More
-              </Text>
-              <Text style={styles.share} onPress={()=>share(article.url)}>Share </Text>
-              </View>
-            </View>
-          ))}
-        </ScrollView>
+            ))}
+          </ScrollView>
+        </>
       )}
     </View>
   );
@@ -90,7 +92,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#202124',
     height: '100%',
-    width: '100%',
+    width: "100%",
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   newscontainer: {
     flexDirection: 'column',
@@ -111,14 +115,16 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: 5,
   },
-  txt:{color:"#fff",fontSize:28,fontWeight:"bold",paddingVertical:6,},
-  share:{fontSize: 15,
+  txt: { color: "#fff", fontSize: 28, fontWeight: "bold", paddingVertical: 6, },
+  share: {
+    fontSize: 15,
     color: '#e6e6e6',
     alignSelf: 'flex-start',
     backgroundColor: '#d34646',
     padding: 10,
     borderRadius: 10,
-    margin: 5,}
+    margin: 5,
+  }
 });
 
 export default GetNews;

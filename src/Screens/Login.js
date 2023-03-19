@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View,Image } from 'react-native'
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View,Image, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { auth } from '../../firebase';
 
@@ -6,7 +6,8 @@ const Login = ({navigation}) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState(null);
+    const [errorMessage] = useState(null);
+    const [isloading , setisloading] = useState(false);
 
     
 
@@ -37,6 +38,7 @@ const Login = ({navigation}) => {
           );
           return;
         }
+        setisloading(true)
       
         auth.signInWithEmailAndPassword(email, password)
           .then(() => {
@@ -46,7 +48,7 @@ const Login = ({navigation}) => {
             if (error.code === 'auth/user-not-found') {
               Alert.alert(
                 'NewsApp',
-                'Email and password are incorrect.',
+                'User Not Found Please SignUp.',
                 [{ text: 'OK', style: 'cancel' }]
               );
             } else if (error.code === 'auth/wrong-password') {
@@ -56,8 +58,12 @@ const Login = ({navigation}) => {
                 [{ text: 'OK', style: 'cancel' }]
               );
             } else {
-              setErrorMessage(error.message);
+              Alert.alert('NewsApp',
+            error.message,
+            [{ text: 'OK', style: 'cancel' }]);
             }
+          }).finally(()=>{
+            setisloading(false);
           });
       };
       
@@ -89,7 +95,7 @@ const Login = ({navigation}) => {
             );
             return;
           }
-        
+        setisloading(true)
         auth
         .createUserWithEmailAndPassword(email, password)
         .then(userCredentials =>{
@@ -101,9 +107,15 @@ const Login = ({navigation}) => {
           if (error.code === 'auth/email-already-in-use') {
             Alert.alert('NewsApp', 'Email already in Exist', [{ text: 'OK', style: 'cancel' }]);
           } else {
-            setErrorMessage(error.message);
+            Alert.alert('NewsApp',
+            error.message,
+            [{ text: 'OK', style: 'cancel' }]);
           }
-        });
+
+        })
+        .finally(()=>{
+          setisloading(false);
+        })
       }
 
       
@@ -111,6 +123,8 @@ const Login = ({navigation}) => {
 
     return (
         <View style={styles.container}>
+          {isloading ? <ActivityIndicator size="large" color="#d34646" style={{justifyContent:"center", alignContent:'center'}}/> : (
+            <>
             <View style={{alignItems:"center", justifyContent:'center',paddingVertical:20}}>
                 <Image source={require('../Images/logo.jpg')}/>
             </View>
@@ -131,6 +145,9 @@ const Login = ({navigation}) => {
                     </Text>
                 </TouchableOpacity>
             </View>
+            </>
+          )}
+            
         </View>
     )
 }

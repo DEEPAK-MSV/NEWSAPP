@@ -6,7 +6,7 @@ import HomeScreen from '../Screens/HomeScreen';
 import WebViewScreen from '../Screens/WebViewScreen';
 import GetNews from '../Screens/GetNews';
 import Login from '../Screens/Login';
-import { auth } from '../../firebase';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -17,16 +17,7 @@ const global = {
   headerStyle: { backgroundColor: '#202124' },
 }
 
-const Navigation = ({navigation}) => {
-
-  useEffect(()=>{
-    const unsub = auth.onAuthStateChanged(user=>{
-         if(user){
-          navigation.replace('home');
-         }
-     })
-     return unsub
- },[])
+const Navigation = () => {
 
   return (
     <NavigationContainer>

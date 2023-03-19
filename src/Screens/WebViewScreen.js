@@ -4,7 +4,6 @@ import WebView from 'react-native-webview';
 
 const WebViewScreen = ({route}) => {
   
-  
   return (
     <View style={{backgroundColor:"#202124",flex:1}}>
       <WebView source={{uri: `${route.params.url}`}}/>

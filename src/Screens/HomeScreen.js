@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View, Image, ActivityIndicator, Linking, Alert , Share} from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Image, ActivityIndicator, Linking, Alert, Share } from 'react-native';
 import React, { useState, useEffect } from 'react'
 import Categories from '../components/Categories'
 
@@ -7,7 +7,7 @@ import Categories from '../components/Categories'
 const HomeScreen = ({ navigation, }) => {
 
     const categories = () => {
-        const newses = ["Business", "Entertainment","Health", "Sports", "Science","Technology",];
+        const newses = ["Business", "Entertainment", "Health", "Sports", "Science", "Technology",];
         setTopic(newses);
     }
 
@@ -24,19 +24,19 @@ const HomeScreen = ({ navigation, }) => {
             const data = await response.json();
             const filteredData = data.articles.filter(article => article.author && article.urlToImage && article.description);
             setNews(filteredData);
-            
+
         } catch (error) {
             console.log(error);
         }
     }
 
 
-    const share =async (url)=>{
+    const share = async (url) => {
         try {
             const result = await Share.share({
                 message: url,
             });
-           
+
         } catch (error) {
             Alert.alert(error.message);
         }
@@ -51,11 +51,11 @@ const HomeScreen = ({ navigation, }) => {
     return (
         <View style={styles.container}>
             <View style={{ paddingVertical: 15, borderRadius: 20 }}>
-                <Categories navigation={navigation}/>
+                <Categories navigation={navigation} />
             </View>
-            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{height:"100%", width:"100%" ,justifyContent:"center",alignItems:'center'}}>
                 {news.length === 0 ? (
-                    <ActivityIndicator size='large' color="white" />
+                    <ActivityIndicator size='large' color="#d34646" />
                 ) : (
                     <ScrollView>
                         {news.map((article, index) => (
@@ -69,11 +69,11 @@ const HomeScreen = ({ navigation, }) => {
                                 <Text style={styles.description}>
                                     {article.description}
                                 </Text>
-                                <View style={{justifyContent:'space-between',flexDirection:'row',}}>
+                                <View style={{ justifyContent: 'space-between', flexDirection: 'row', }}>
                                     <Text style={styles.read} onPress={() => navigation.navigate('webview', { url: article.url })}>
                                         Read More
                                     </Text>
-                                    <Text style={styles.share} onPress={()=>share(article.url)}>Share </Text>
+                                    <Text style={styles.share} onPress={() => share(article.url)}>Share </Text>
                                 </View>
                             </View>
                         ))}
@@ -81,6 +81,7 @@ const HomeScreen = ({ navigation, }) => {
                 )}
                 <View style={{ height: "10%" }} />
             </View>
+
         </View>
     );
 }
@@ -90,11 +91,11 @@ export default HomeScreen;
 const styles = StyleSheet.create({
     container: { backgroundColor: '#202124', height: '100%', width: "100%", },
     txt: { fontSize: 20, color: '#fff', paddingVertical: 50 },
-    newscontainer: { flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', paddingHorizontal: 10, paddingVertical: 20,},
+    newscontainer: { flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-start', paddingHorizontal: 10, paddingVertical: 20, },
     author: { fontSize: 20, color: '#e6e6e6', paddingVertical: 10 },
     img: { height: 250, width: "100%" },
     description: { fontSize: 14, color: "#fff", paddingBottom: 10 },
-    read:{fontSize: 15, color: '#e6e6e6',backgroundColor: "#d34646", padding: 10, borderRadius: 10,margin:5,},
-    share:{fontSize: 15, color: '#e6e6e6',backgroundColor: "#d34646", padding: 10, borderRadius: 10,margin:5 }
+    read: { fontSize: 15, color: '#e6e6e6', backgroundColor: "#d34646", padding: 10, borderRadius: 10, margin: 5, },
+    share: { fontSize: 15, color: '#e6e6e6', backgroundColor: "#d34646", padding: 10, borderRadius: 10, margin: 5 }
 
 });

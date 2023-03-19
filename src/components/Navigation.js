@@ -6,6 +6,7 @@ import HomeScreen from '../Screens/HomeScreen';
 import WebViewScreen from '../Screens/WebViewScreen';
 import GetNews from '../Screens/GetNews';
 import Login from '../Screens/Login';
+import Signup from '../Screens/Signup';
 
 
 const Stack = createNativeStackNavigator();
@@ -23,6 +24,7 @@ const Navigation = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={global}>
         <Stack.Screen name='login' component={Login} options={{headerShown:false}}/>
+        <Stack.Screen name='signup' component={Signup} options={{headerShown:false}}/>
         <Stack.Screen name='home' component={HomeScreen}/>
         <Stack.Screen name='webview' component={WebViewScreen} />
         <Stack.Screen name='getnews' component={GetNews} />

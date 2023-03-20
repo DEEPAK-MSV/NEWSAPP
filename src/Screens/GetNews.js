@@ -56,6 +56,7 @@ const GetNews = ({ route, navigation }) => {
       <View style={{ justifyContent: 'center', alignItems: "center", backgroundColor: "#d34646", borderBottomLeftRadius: 20, borderBottomRightRadius: 20 }}>
             <Text style={styles.txt}>{`${route.params.category}`}</Text>
           </View>
+          <View style={{height:"100%", width:"100%" ,justifyContent:"center",alignItems:'center'}}>
       {isLoading ? (
         <ActivityIndicator size="large" color="#d34646" style={{ justifyContent: "center", alignContent: 'center' }} />
       ) : (
@@ -84,6 +85,7 @@ const GetNews = ({ route, navigation }) => {
           </ScrollView>
         </>
       )}
+      </View>
     </View>
   );
 };
@@ -93,8 +95,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#202124',
     height: '100%',
     width: "100%",
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   newscontainer: {
     flexDirection: 'column',

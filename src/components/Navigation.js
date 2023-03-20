@@ -23,8 +23,8 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={global}>
-        <Stack.Screen name='login' component={Login} options={{headerShown:false}}/>
-        <Stack.Screen name='signup' component={Signup} options={{headerShown:false}}/>
+        {/* <Stack.Screen name='login' component={Login} options={{headerShown:false}}/>
+        <Stack.Screen name='signup' component={Signup} options={{headerShown:false}}/> */}
         <Stack.Screen name='home' component={HomeScreen}/>
         <Stack.Screen name='webview' component={WebViewScreen} />
         <Stack.Screen name='getnews' component={GetNews} />

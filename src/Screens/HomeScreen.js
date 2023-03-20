@@ -57,7 +57,7 @@ const HomeScreen = ({ navigation, }) => {
                 {news.length === 0 ? (
                     <ActivityIndicator size='large' color="#d34646" />
                 ) : (
-                    <ScrollView>
+                    <ScrollView style={{marginBottom:"14%"}}>
                         {news.map((article, index) => (
                             <View key={index} style={styles.newscontainer}>
                                 <Image source={{ uri: article.urlToImage }} style={styles.img} />
@@ -79,7 +79,6 @@ const HomeScreen = ({ navigation, }) => {
                         ))}
                     </ScrollView>
                 )}
-                <View style={{ height: "10%" }} />
             </View>
 
         </View>

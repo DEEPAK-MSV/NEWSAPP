@@ -61,7 +61,7 @@ const GetNews = ({ route, navigation }) => {
         <ActivityIndicator size="large" color="#d34646" style={{ justifyContent: "center", alignContent: 'center' }} />
       ) : (
         <>
-          <ScrollView style={{marginBottom:50}}>
+          <ScrollView style={{marginBottom:"10%"}}>
             {news.map((article, index) => (
               <View key={index} style={styles.newscontainer}>
                 <Image source={{ uri: article.urlToImage }} style={styles.img} />

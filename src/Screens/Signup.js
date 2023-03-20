@@ -68,8 +68,8 @@ const Signup = ({navigation}) => {
                         <Image source={require('../Images/logo.jpg')} />
                     </View>
                     <View style={{ width: "100%", alignItems: 'center', justifyContent: 'center', paddingVertical: 20 }}>
-                        <TextInput placeholder='Email' value={email} onChangeText={text => setEmail(text)} placeholderTextColor={"#0782f9"} style={styles.tin} />
-                        <TextInput placeholder='Password' value={password} onChangeText={text => setPassword(text)} placeholderTextColor={"#0782f9"} style={styles.tin} />
+                        <TextInput autoFocus placeholder='Email' value={email} onChangeText={text => setEmail(text)} placeholderTextColor={"#0782f9"} style={styles.tin} />
+                        <TextInput secureTextEntry placeholder='Password' value={password} onChangeText={text => setPassword(text)} placeholderTextColor={"#0782f9"} style={styles.tin} />
                     </View>
                     <View style={{ width: "100%", alignItems: 'center', justifyContent: 'center' }}>
                         <TouchableOpacity style={styles.tchable} onPress={handleSignUp}>

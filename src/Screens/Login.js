@@ -1,6 +1,7 @@
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View, Image, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { auth } from '../../firebase';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({ navigation }) => {
 
@@ -8,6 +9,19 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [errorMessage] = useState(null);
   const [isloading, setisloading] = useState(false);
+
+  useEffect(()=>{
+    get_email
+  })
+
+  const get_email = async () => {
+    let email = await AsyncStorage.getItem('email')
+    if(email) {
+      navigation.replace('Home', {email})
+    } else {
+      navigation.replace("Login")
+    }
+  }
 
 
 

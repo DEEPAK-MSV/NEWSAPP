@@ -11,7 +11,7 @@ const Login = ({ navigation }) => {
   const [isloading, setisloading] = useState(false);
 
   useEffect(()=>{
-    get_email
+    get_email();
   })
 
   const get_email = async () => {
